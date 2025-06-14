@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import SearchBar from "./components/SearchBar";
 
 function App() {
+  const [city, setCity] = useState(""); //To track the input from the user
+
+  //handle function
+  function handleInputChange(newValue) {
+    setCity(newValue);
+  }
+
+  //hanlde search submit function
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    console.log("Searching for weather in:", city);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <SearchBar
+        value={city}
+        onChange={handleInputChange}
+        onSubmit={handleSearchSubmit}
+
+      />
+
+    </>
+  )
+
 }
 
 export default App;
