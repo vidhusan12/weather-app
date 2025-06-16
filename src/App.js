@@ -55,6 +55,7 @@ function App() {
   return (
     <>
       <div className="app-container">
+        <h1>BreezeBox</h1>
         <SearchBar
           value={city}
           onChange={handleInputChange}
