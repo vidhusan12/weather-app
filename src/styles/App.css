@@ -9,13 +9,23 @@
 }
 
 .weather-box {
-  background-color: #f5f5f5;
+  background-color: white;
+  color: #333;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   width: 300px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 
+}
+
+.weather-box {
+  transition: transform 0.2s ease;
+}
+
+.weather-box:hover {
+  transform: translateY(-4px);
 }
 
 .temp {
@@ -26,7 +36,9 @@
 
 .desc {
   text-transform: capitalize;
-  color: #555;
+  color: #666;
+  margin-top: 8px;
+  font-size: 1.1rem;
 }
 
 .status-text {
