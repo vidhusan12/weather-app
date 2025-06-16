@@ -3,6 +3,7 @@ import SearchBar from "./components/SearchBar";
 
 function App() {
   const [city, setCity] = useState(""); //To track the input from the user
+  const [weatherData, setWeatherData] = useState(null);
 
   //handle function
   function handleInputChange(newValue) {
@@ -20,6 +21,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        setWeatherData(data);
       })
       .catch(error => {
         console.log("Error fetching weather:", error);
@@ -36,6 +38,14 @@ function App() {
         onSubmit={handleSearchSubmit}
 
       />
+
+      {weatherData && (
+        <div>
+          <h2>{weatherData.name}</h2>
+          <p>{weatherData.main.temp}°C</p>
+          <p>{weatherData.weather[0].description}</p>
+        </div>
+      )}
 
     </>
   )
