@@ -8,6 +8,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+
+
   //handle function
   function handleInputChange(newValue) {
     setCity(newValue);
@@ -43,6 +45,8 @@ function App() {
     console.log("Searching for weather in:", city);
   }
 
+
+
   return (
     <>
       <div className="app-container">
@@ -56,6 +60,11 @@ function App() {
         {error && <p className="status-text error">{error}</p>}
         {weatherData && (
           <div className="weather-box">
+            {(() => {
+              const iconCode = weatherData.weather[0].icon;
+              const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+              return <img src={iconUrl} alt="Weather Icon" className="weather-icon" />
+            })()}
             <h2>{weatherData.name}</h2>
             <p className="temp">{weatherData.main.temp}°C</p>
             <p className="desc">{weatherData.weather[0].description}</p>
