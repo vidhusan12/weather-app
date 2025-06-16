@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
+import "./styles/App.css";
 
 function App() {
   const [city, setCity] = useState(""); //To track the input from the user
@@ -25,7 +26,12 @@ function App() {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        if (data.cod !== 200) {
+          setError("City not found. Try again.");
+          setLoading(false);
+          return;
+        }
+
         setWeatherData(data);
         setLoading(false);
       })
@@ -39,22 +45,23 @@ function App() {
 
   return (
     <>
-      <SearchBar
-        value={city}
-        onChange={handleInputChange}
-        onSubmit={handleSearchSubmit}
+      <div className="app-container">
+        <SearchBar
+          value={city}
+          onChange={handleInputChange}
+          onSubmit={handleSearchSubmit}
 
-      />
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {weatherData && (
-        <div>
-          <h2>{weatherData.name}</h2>
-          <p>{weatherData.main.temp}°C</p>
-          <p>{weatherData.weather[0].description}</p>
-        </div>
-      )}
-
+        />
+        {loading && <p className="status-text">Loading...</p>}
+        {error && <p className="status-text error">{error}</p>}
+        {weatherData && (
+          <div className="weather-box">
+            <h2>{weatherData.name}</h2>
+            <p className="temp">{weatherData.main.temp}°C</p>
+            <p className="desc">{weatherData.weather[0].description}</p>
+          </div>
+        )}
+      </div>
     </>
   )
 
